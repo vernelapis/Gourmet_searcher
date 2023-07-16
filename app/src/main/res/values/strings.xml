@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="title_home">Home</string>
+    <string name="locate_button_label">現在地を取得して検索</string>
+
+    <string name="title_dashboard">Favorite</string>
+
+
+    <string name="title_notifications">Bookmarks</string>
+</resources>

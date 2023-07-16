@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
 import androidx.navigation.NavController
 import com.example.myapplication.models.TestGourmet
 import com.example.myapplication.repository.Api
@@ -26,10 +27,9 @@ class HomeViewModel : ViewModel() {
     var searchResultText = MutableLiveData<String>().apply {
         value = "This is search result Fragment"
     }
-    var searchCallCount = MutableLiveData<Int>().apply { value = 0 }
 
-    var searchedGourmetList = MutableLiveData<MutableList<TestGourmet>>()
-        .apply { value = mutableListOf<TestGourmet>(TestGourmet("test_name", "test_access")) }
+    private var _searchedGourmetList = MutableLiveData<List<TestGourmet>>(emptyList())
+    val searchedGourmetList: LiveData<List<TestGourmet>> = _searchedGourmetList.distinctUntilChanged()
 
     fun searchGourmet(context: Context, navController: NavController){
 
@@ -38,16 +38,12 @@ class HomeViewModel : ViewModel() {
                 val location = GPS(context).getCurrentLocation()
                 _currentLat = location.latitude
                 _currentLng = location.longitude
-                var nowCount = searchCallCount.value ?: 0
-                searchCallCount.postValue(++nowCount)
-//                var _text = Api().apiTest(_currentLat.toString(), _currentLng.toString())
-//                _text = "Count : ${searchCallCount.value}\n$_text"
-//                searchResultText.postValue(_text)
                 val gourmetList = Api().apiTest(_currentLat.toString(), _currentLng.toString())
                 println(gourmetList)
-                searchedGourmetList.postValue(gourmetList)
+                _searchedGourmetList.postValue(gourmetList)
 
             } catch (e: Exception) {
+                println(e)
                 val activity = context as? Activity
                 activity?.runOnUiThread {
                     navController.popBackStack()

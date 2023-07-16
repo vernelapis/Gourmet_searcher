@@ -2,11 +2,31 @@ package com.example.myapplication.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ItemGourmetListBinding
 import com.example.myapplication.models.TestGourmet
 
-class GourmetListAdapter(private val gourmetList: List<TestGourmet>) : RecyclerView.Adapter<GourmetViewHolder>() {
+private object DiffCallback : DiffUtil.ItemCallback<TestGourmet>() {
+    override fun areItemsTheSame(oldItem: TestGourmet, newItem: TestGourmet): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: TestGourmet, newItem: TestGourmet): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class GourmetListAdapter: ListAdapter<TestGourmet, GourmetListAdapter.GourmetViewHolder>(DiffCallback) {
+    class GourmetViewHolder(private val binding: ItemGourmetListBinding) :RecyclerView.ViewHolder(binding.root){
+        fun bind(gourmetData: TestGourmet) {
+            binding.apply {
+                nameTextView.text = gourmetData.name
+                accessTextView.text = gourmetData.access
+            }
+        }
+    }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GourmetViewHolder {
             val inflater = LayoutInflater.from(parent.context)
@@ -15,11 +35,8 @@ class GourmetListAdapter(private val gourmetList: List<TestGourmet>) : RecyclerV
         }
 
         override fun onBindViewHolder(holder: GourmetViewHolder, position: Int) {
-            val gourmet = gourmetList[position]
-            holder.bind(gourmet)
+//            holder.bind(getItem(position), viewLifecycleOwner, viewModel)
+            holder.bind(getItem(position))
         }
-
-        override fun getItemCount(): Int = gourmetList.size
-
 
 }

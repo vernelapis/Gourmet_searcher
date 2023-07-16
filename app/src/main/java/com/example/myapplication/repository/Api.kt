@@ -13,7 +13,7 @@ class Api {
     private val BASE_URL = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?"
     val API_KEY = "6b4f5d742fca2ad3"
 
-    fun apiTest(lat:String, lng:String): MutableList<TestGourmet>?{
+    fun apiTest(lat:String, lng:String): List<TestGourmet>?{
 
         val baseParameters = listOf<Pair<String,String>>(
             "key" to API_KEY,
@@ -38,24 +38,18 @@ class Api {
                 /// レスポンス正常取得
                 /// JSONObjectに変換
                 val data = result.get().obj()
-//                Log.d(
-//                    ContentValues.TAG, "Responsed JSON : "
-//                            +data.toString())
-//                data.toString()
                 val dataList = mutableListOf<TestGourmet>()
-                println(data)
                 val results =  data.getJSONObject("results")
 
                 val resultsArray = results.getJSONArray("shop")
-                println(resultsArray)
                 for (i in 0 until resultsArray.length()) {
                     val result = resultsArray.getJSONObject(i)
+                    val id = result.getString("id")
                     val name = result.getString("name")
                     val access = result.getString("access")
 
                     // DataItemオブジェクトを作成し、リストに追加
-                    val dataItem = TestGourmet(name,access)
-                    println(dataItem)
+                    val dataItem = TestGourmet(id,name,access)
                     dataList.add(dataItem)
                 }
                 dataList

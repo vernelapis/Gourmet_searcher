@@ -35,24 +35,19 @@ class SearchResultFragment : Fragment() {
             textView.text = it
         }
 
-        val adapter = GourmetListAdapter(homeViewModel.searchedGourmetList.value!!)
+        val adapter = GourmetListAdapter()
         binding.searchResultRecyclerView.adapter = adapter
         binding.searchResultRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         homeViewModel.searchedGourmetList.observe(viewLifecycleOwner) {
-            val adapter = GourmetListAdapter(homeViewModel.searchedGourmetList.value!!)
-            binding.searchResultRecyclerView.adapter = adapter
+            adapter.submitList(it)
         }
-
-
-
 
         try {
             homeViewModel.searchGourmet(requireContext(), findNavController())
         }catch (e: Exception){
             this.findNavController().popBackStack()
         }
-
 
         return root
     }

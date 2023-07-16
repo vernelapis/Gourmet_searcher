@@ -1,6 +1,7 @@
 package com.example.myapplication.models
 
 data class TestGourmet(
+    val id: String,
     val name: String,
     val access: String,
 )

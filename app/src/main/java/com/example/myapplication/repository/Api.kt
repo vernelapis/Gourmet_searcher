@@ -47,9 +47,10 @@ class Api {
                     val id = result.getString("id")
                     val name = result.getString("name")
                     val access = result.getString("access")
+                    val logo_image = result.getString("logo_image")
 
                     // DataItemオブジェクトを作成し、リストに追加
-                    val dataItem = TestGourmet(id,name,access)
+                    val dataItem = TestGourmet(id,name,access, logo_image)
                     dataList.add(dataItem)
                 }
                 dataList

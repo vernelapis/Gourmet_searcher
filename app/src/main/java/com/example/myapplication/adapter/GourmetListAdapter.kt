@@ -24,6 +24,7 @@ class GourmetListAdapter: ListAdapter<TestGourmet, GourmetListAdapter.GourmetVie
             binding.apply {
                 nameTextView.text = gourmetData.name
                 accessTextView.text = gourmetData.access
+                gourmet = gourmetData
             }
         }
     }

@@ -4,6 +4,7 @@ data class TestGourmet(
     val id: String,
     val name: String,
     val access: String,
+    val logo_image: String,// url
 )
 
 data class GourmetList(
@@ -66,6 +67,6 @@ data class GourmetData(
     val lunch: String,
     val midnight: String,
     val shop_detail_memo: String,
-    val coupon_urls: List<Any>?
+    val coupon_urls: List<Any>?,
 )
 

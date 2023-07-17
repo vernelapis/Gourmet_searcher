@@ -29,15 +29,16 @@ class GourmetListAdapter: ListAdapter<TestGourmet, GourmetListAdapter.GourmetVie
         }
     }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GourmetViewHolder {
-            val inflater = LayoutInflater.from(parent.context)
-            val binding = ItemGourmetListBinding.inflate(inflater, parent, false)
-            return GourmetViewHolder(binding)
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GourmetViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemGourmetListBinding.inflate(inflater, parent, false)
+        return GourmetViewHolder(binding)
+    }
 
-        override fun onBindViewHolder(holder: GourmetViewHolder, position: Int) {
-//            holder.bind(getItem(position), viewLifecycleOwner, viewModel)
-            holder.bind(getItem(position))
-        }
+    override fun onBindViewHolder(holder: GourmetViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+
+
 
 }

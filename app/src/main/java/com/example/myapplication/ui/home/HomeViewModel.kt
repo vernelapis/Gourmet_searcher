@@ -7,10 +7,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.distinctUntilChanged
 import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.myapplication.R
 import com.example.myapplication.models.TestGourmet
 import com.example.myapplication.repository.Api
 import com.example.myapplication.repository.GPS
-import com.example.myapplication.ui.search_result.SearchResultFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,7 +52,5 @@ class HomeViewModel : ViewModel() {
                 }
             }
         }
-
-
     }
 }

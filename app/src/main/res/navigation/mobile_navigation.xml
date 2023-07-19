@@ -35,5 +35,18 @@
         android:id="@+id/searchResultFragment"
         android:name="com.example.myapplication.ui.search_result.SearchResultFragment"
         android:label="SearchResultFragment"
-        tools:layout="@layout/fragment_search_result"/>
+        tools:layout="@layout/fragment_search_result">
+        <action
+            android:id="@+id/action_searchResultFragment_to_shopInformationFragment2"
+            app:destination="@id/shopInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopInformationFragment"
+        android:name="com.example.myapplication.ui.shop_information.ShopInformationFragment"
+        android:label="ShopInformationFragment"
+        tools:layout="@layout/fragment_shop_information">
+        <argument
+            android:name="selectedGourmetData"
+            app:argType="com.example.myapplication.models.TestGourmet" />
+    </fragment>
 </navigation>

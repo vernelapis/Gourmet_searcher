@@ -10,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
 import com.example.myapplication.adapter.GourmetListAdapter
 import com.example.myapplication.databinding.FragmentSearchResultBinding
+import com.example.myapplication.models.TestGourmet
 import com.example.myapplication.ui.home.HomeViewModel
 
 class SearchResultFragment : Fragment() {
@@ -35,7 +37,12 @@ class SearchResultFragment : Fragment() {
             textView.text = it
         }
 
-        val adapter = GourmetListAdapter()
+        val adapter = GourmetListAdapter(GourmetListAdapter.OnClickListener{
+            val selectGourmet: TestGourmet = it
+            val action = SearchResultFragmentDirections
+                .actionSearchResultFragmentToShopInformationFragment2(selectGourmet)
+            findNavController().navigate(action)
+        })
         binding.searchResultRecyclerView.adapter = adapter
         binding.searchResultRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 

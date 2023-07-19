@@ -38,7 +38,6 @@ class HomeFragment : Fragment() {
 
         binding.locateAndSearchButton.setOnClickListener{
             findNavController().navigate(R.id.action_home_to_searchResult)
-
         }
 
         return root

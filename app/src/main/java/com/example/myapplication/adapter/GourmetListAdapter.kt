@@ -18,7 +18,9 @@ private object DiffCallback : DiffUtil.ItemCallback<TestGourmet>() {
     }
 }
 
-class GourmetListAdapter: ListAdapter<TestGourmet, GourmetListAdapter.GourmetViewHolder>(DiffCallback) {
+class GourmetListAdapter(
+    private val onClickListener: OnClickListener
+    ): ListAdapter<TestGourmet, GourmetListAdapter.GourmetViewHolder>(DiffCallback) {
     class GourmetViewHolder(private val binding: ItemGourmetListBinding) :RecyclerView.ViewHolder(binding.root){
         fun bind(gourmetData: TestGourmet) {
             binding.apply {
@@ -36,9 +38,16 @@ class GourmetListAdapter: ListAdapter<TestGourmet, GourmetListAdapter.GourmetVie
     }
 
     override fun onBindViewHolder(holder: GourmetViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val gourmetData = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(gourmetData)
+        }
+        holder.bind(gourmetData)
     }
 
+    class OnClickListener(val clickListener: (gourmetData: TestGourmet) -> Unit) {
+        fun onClick(gourmetData: TestGourmet) = clickListener(gourmetData)
+    }
 
 
 }

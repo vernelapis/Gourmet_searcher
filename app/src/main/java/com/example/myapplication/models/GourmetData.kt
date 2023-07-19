@@ -1,11 +1,14 @@
 package com.example.myapplication.models
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class TestGourmet(
     val id: String,
     val name: String,
     val access: String,
     val logo_image: String,// url
-)
+) : Parcelable
 
 data class GourmetList(
     val rootkey: List<GourmetData>

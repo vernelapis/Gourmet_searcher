@@ -6,27 +6,27 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ItemGourmetListBinding
-import com.example.myapplication.models.TestGourmet
+import com.example.myapplication.models.Shop
 
-private object DiffCallback : DiffUtil.ItemCallback<TestGourmet>() {
-    override fun areItemsTheSame(oldItem: TestGourmet, newItem: TestGourmet): Boolean {
+private object DiffCallback : DiffUtil.ItemCallback<Shop>() {
+    override fun areItemsTheSame(oldItem: Shop, newItem: Shop): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: TestGourmet, newItem: TestGourmet): Boolean {
+    override fun areContentsTheSame(oldItem: Shop, newItem: Shop): Boolean {
         return oldItem == newItem
     }
 }
 
 class GourmetListAdapter(
     private val onClickListener: OnClickListener
-    ): ListAdapter<TestGourmet, GourmetListAdapter.GourmetViewHolder>(DiffCallback) {
+    ): ListAdapter<Shop, GourmetListAdapter.GourmetViewHolder>(DiffCallback) {
     class GourmetViewHolder(private val binding: ItemGourmetListBinding) :RecyclerView.ViewHolder(binding.root){
-        fun bind(gourmetData: TestGourmet) {
+        fun bind(shopData: Shop) {
             binding.apply {
-                nameTextView.text = gourmetData.name
-                accessTextView.text = gourmetData.access
-                gourmet = gourmetData
+                nameTextView.text = shopData.name
+                accessTextView.text = shopData.access
+                gourmet = shopData
             }
         }
     }
@@ -38,15 +38,15 @@ class GourmetListAdapter(
     }
 
     override fun onBindViewHolder(holder: GourmetViewHolder, position: Int) {
-        val gourmetData = getItem(position)
+        val shopData = getItem(position)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(gourmetData)
+            onClickListener.onClick(shopData)
         }
-        holder.bind(gourmetData)
+        holder.bind(shopData)
     }
 
-    class OnClickListener(val clickListener: (gourmetData: TestGourmet) -> Unit) {
-        fun onClick(gourmetData: TestGourmet) = clickListener(gourmetData)
+    class OnClickListener(val clickListener: (shopData: Shop) -> Unit) {
+        fun onClick(shopData: Shop) = clickListener(shopData)
     }
 
 

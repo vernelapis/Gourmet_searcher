@@ -1,17 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--    <data>-->
-<!--        <variable-->
-<!--            name="gourmet"-->
-<!--            type="com.example.myapplication.models.TestGourmet" />-->
-<!--    </data>-->
+    <data>
+        <variable
+            name="gourmet"
+            type="com.example.myapplication.models.Shop" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                app:urlImage="@{gourmet.logo_image}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{gourmet.name}" />
+
+                <TextView
+                    android:id="@+id/accessTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{gourmet.access}" />
+
+                <TextView
+                    android:id="@+id/budgetTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{gourmet.budget.average}" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/catchTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:text="@{gourmet.catch}" />
+
+        <TextView
+            android:id="@+id/openTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{gourmet.open}" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:urlImage="@{gourmet.photo.mobile.l}" />
+    </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="192dp"
-        android:layout_height="162dp"
-        android:text="TextView" />
 </layout>

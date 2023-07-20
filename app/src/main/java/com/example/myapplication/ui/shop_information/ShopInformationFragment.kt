@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.adapter.GourmetListAdapter
 import com.example.myapplication.databinding.FragmentSearchResultBinding
 import com.example.myapplication.databinding.FragmentShopInformationBinding
-import com.example.myapplication.models.TestGourmet
 import com.example.myapplication.ui.home.HomeViewModel
 
 class ShopInformationFragment : Fragment() {
@@ -38,7 +37,8 @@ class ShopInformationFragment : Fragment() {
         _binding = FragmentShopInformationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.textView.text = gourmetData.name
+//        binding.textView.text = gourmetData.name
+        binding.gourmet = gourmetData
 
         return root
     }

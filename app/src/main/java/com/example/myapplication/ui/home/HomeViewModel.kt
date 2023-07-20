@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
-import com.example.myapplication.models.TestGourmet
+import com.example.myapplication.models.Shop
 import com.example.myapplication.repository.Api
 import com.example.myapplication.repository.GPS
 import kotlinx.coroutines.CoroutineScope
@@ -18,9 +18,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
-
-    private  var _currentLat = 34.67
-    private var _currentLng = 135.52
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
@@ -30,19 +27,22 @@ class HomeViewModel : ViewModel() {
         value = "This is search result Fragment"
     }
 
-    private var _searchedGourmetList = MutableLiveData<List<TestGourmet>>(emptyList())
-    val searchedGourmetList: LiveData<List<TestGourmet>> = _searchedGourmetList.distinctUntilChanged()
+    private var _searchedGourmetList = MutableLiveData<List<Shop>>(emptyList())
+    val searchedGourmetList: LiveData<List<Shop>> = _searchedGourmetList.distinctUntilChanged()
 
     fun searchGourmet(context: Context, navController: NavController){
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val location = GPS(context).getCurrentLocation()
-                _currentLat = location.latitude
-                _currentLng = location.longitude
-                val gourmetList = Api().apiTest(_currentLat.toString(), _currentLng.toString())
-                println(gourmetList)
-                _searchedGourmetList.postValue(gourmetList)
+//                val location = GPS(context).getCurrentLocation()
+//                val currentLat = location.latitude
+//                val currentLng = location.longitude
+//                val searchResultData = Api().apiTest(currentLat.toString(), currentLng.toString())
+                val searchResultData = Api().apiTest("34.67", "135.52")
+                println(searchResultData)
+                if (searchResultData != null) {
+                    _searchedGourmetList.postValue(searchResultData.shop_list)
+                }
 
             } catch (e: Exception) {
                 println(e)

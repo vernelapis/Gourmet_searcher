@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.adapter.GourmetListAdapter
 import com.example.myapplication.databinding.FragmentSearchResultBinding
-import com.example.myapplication.models.TestGourmet
+import com.example.myapplication.models.Shop
 import com.example.myapplication.ui.home.HomeViewModel
 
 class SearchResultFragment : Fragment() {
@@ -38,7 +38,7 @@ class SearchResultFragment : Fragment() {
         }
 
         val adapter = GourmetListAdapter(GourmetListAdapter.OnClickListener{
-            val selectGourmet: TestGourmet = it
+            val selectGourmet: Shop = it
             val action = SearchResultFragmentDirections
                 .actionSearchResultFragmentToShopInformationFragment2(selectGourmet)
             findNavController().navigate(action)

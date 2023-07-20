@@ -9,8 +9,8 @@ import com.example.myapplication.R
 
 
 
-@BindingAdapter("logoImageUrl")
-fun bindLogoImage(imgView: ImageView, imgUrl: String?) {
+@BindingAdapter("urlImage")
+fun bindUrlImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
         val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
         imgView.load(imgUri) {

@@ -47,6 +47,6 @@
         tools:layout="@layout/fragment_shop_information">
         <argument
             android:name="selectedGourmetData"
-            app:argType="com.example.myapplication.models.TestGourmet" />
+            app:argType="com.example.myapplication.models.Shop" />
     </fragment>
 </navigation>

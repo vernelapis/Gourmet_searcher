@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
@@ -27,8 +30,8 @@ class SearchResultFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(requireParentFragment()).get(HomeViewModel::class.java)
+        val homeViewModel: HomeViewModel by navGraphViewModels(R.id.navigation_home)
+//            ViewModelProvider(requireParentFragment()).get(HomeViewModel::class.java)
 
         _binding = FragmentSearchResultBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -41,15 +44,15 @@ class SearchResultFragment : Fragment() {
         })
         binding.searchResultRecyclerView.adapter = adapter
         binding.searchResultRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.searchResultRecyclerView.setOnScrollChangeListener { v, _, _, _, _ ->
+            if (!v.canScrollVertically(1)){
+                homeViewModel.searchMoreGourmet()
+            }
+        }
+
 
         homeViewModel.searchedGourmetList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
-        }
-
-        try {
-            homeViewModel.searchGourmet(requireContext(), findNavController())
-        }catch (e: Exception){
-            this.findNavController().popBackStack()
         }
 
         return root

@@ -20,7 +20,7 @@
         <action
             android:id="@+id/action_home_to_searchResult"
             app:destination="@id/searchResultFragment"
-            app:popEnterAnim="@android:anim/fade_in"
+            app:enterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
@@ -34,16 +34,19 @@
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.example.myapplication.ui.search_result.SearchResultFragment"
-        android:label="SearchResultFragment"
+        android:label="周辺のグルメ"
         tools:layout="@layout/fragment_search_result">
         <action
             android:id="@+id/action_searchResultFragment_to_shopInformationFragment2"
-            app:destination="@id/shopInformationFragment" />
+            app:destination="@id/shopInformationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/searchResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/shopInformationFragment"
         android:name="com.example.myapplication.ui.shop_information.ShopInformationFragment"
-        android:label="ShopInformationFragment"
+        android:label="店舗詳細"
         tools:layout="@layout/fragment_shop_information">
         <argument
             android:name="selectedGourmetData"

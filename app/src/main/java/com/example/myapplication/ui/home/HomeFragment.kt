@@ -8,9 +8,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.repository.GPS
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -25,8 +30,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val homeViewModel: HomeViewModel by navGraphViewModels(R.id.navigation_home)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -37,7 +41,12 @@ class HomeFragment : Fragment() {
         }
 
         binding.locateAndSearchButton.setOnClickListener{
-            findNavController().navigate(R.id.action_home_to_searchResult)
+            try {
+                homeViewModel.searchGourmet()
+                findNavController().navigate(R.id.action_home_to_searchResult)
+            } catch (e:Exception){
+                println(e)
+            }
         }
 
         return root

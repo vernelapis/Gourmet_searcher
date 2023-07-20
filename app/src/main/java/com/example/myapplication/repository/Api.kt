@@ -1,7 +1,6 @@
 package com.example.myapplication.repository
 
-import android.content.ContentValues
-import android.util.Log
+import com.example.myapplication.models.Genre
 import com.example.myapplication.models.SearchResultData
 import com.example.myapplication.models.Shop
 import com.github.kittinunf.fuel.Fuel
@@ -17,13 +16,29 @@ class Api {
     private val BASE_URL = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?"
     val API_KEY = "6b4f5d742fca2ad3"
 
-    fun apiTest(lat:String, lng:String): SearchResultData?{
+    val SEARCH_COUNT = "20"
+
+    fun gourmetSearch(
+        lat:String,
+        lng:String,
+        range:Int,
+        start:Int,
+        genre:String = "",
+        budget:String = "",
+        party_capacity:Int = 1,
+    ): SearchResultData?{
 
         val baseParameters = listOf<Pair<String,String>>(
             "key" to API_KEY,
             "format" to "json",
             "lat" to lat,
             "lng" to lng,
+            "range" to range.toString(),
+            "start" to start.toString(),
+            "genre" to genre,
+            "budget" to budget,
+            "party_capacity" to party_capacity.toString(),
+            "count" to SEARCH_COUNT
         )
         println(baseParameters)
 
@@ -49,7 +64,6 @@ class Api {
                 for (i in 0 until checkedData.length()) {
                     shopList.add(Gson().fromJson(checkedData.getString(i), Shop::class.java))
                 }
-//                val searchResultData = Gson().fromJson(checkedData, SearchResultData::class.java)
                 val searchResultData = SearchResultData(
                     api_version = results.getString("api_version"),
                     results_available = results.getInt("results_available"),

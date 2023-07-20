@@ -32,10 +32,6 @@ class SearchResultFragment : Fragment() {
 
         _binding = FragmentSearchResultBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val textView: TextView = binding.searchResultTextView
-        homeViewModel.searchResultText.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
 
         val adapter = GourmetListAdapter(GourmetListAdapter.OnClickListener{
             val selectGourmet: Shop = it

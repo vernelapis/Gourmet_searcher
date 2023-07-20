@@ -61,29 +61,12 @@ class Api {
             }
         }
     }
-
-//    private fun nullFixer(rowShops:JSONArray):String{
-//        fun replaceEmptyStrings(jsonArray: JSONArray): JSONArray {
-//            val modifiedArray = JSONArray()
-//            for (i in 0 until jsonArray.length()) {
-//                val element = jsonArray.optString(i, "") // Get the element as a String, empty string if null
-//                if (element.isEmpty()) {
-//                    if ()
-//                    modifiedArray.put("情報なし") // Replace empty strings with "情報なし"
-//                } else {
-//                    modifiedArray.put(element)
-//                }
-//            }
-//            return modifiedArray
-//        }
-    fun replaceEmptyValues(jsonArray: JSONArray): JSONArray {
+    private fun replaceEmptyValues(jsonArray: JSONArray): JSONArray {
         val modifiedArray = JSONArray()
         for (i in 0 until jsonArray.length()) {
             val jsonObject = jsonArray.getJSONObject(i)
-            println(jsonObject)
             for (key in jsonObject.keys()) {
                 val value = jsonObject[key]
-                println(value)
                 if (value is String && value.isEmpty()) {
                     if (key == "party_capacity" || key == "capacity"){
                         jsonObject.put(key, "0")
@@ -94,9 +77,7 @@ class Api {
                     val nestedObject = replaceEmptyValues(JSONArray().put(value)) // Pass the JSONObject as a JSONArray
                     jsonObject.put(key, JSONObject(nestedObject.getJSONObject(0).toString())) // Convert the JSONArray back to JSONObject
                 }
-                println(value)
             }
-            println(jsonObject)
             modifiedArray.put(jsonObject)
 
         }

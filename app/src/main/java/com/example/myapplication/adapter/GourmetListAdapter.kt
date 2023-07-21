@@ -24,8 +24,6 @@ class GourmetListAdapter(
     class GourmetViewHolder(private val binding: ItemGourmetListBinding) :RecyclerView.ViewHolder(binding.root){
         fun bind(shopData: Shop) {
             binding.apply {
-                nameTextView.text = shopData.name
-                accessTextView.text = shopData.access
                 gourmet = shopData
             }
         }

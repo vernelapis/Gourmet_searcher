@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.maps
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlin.math.abs
+import kotlin.properties.Delegates
 
 
 class MapsFragment : Fragment() {
@@ -34,12 +37,11 @@ class MapsFragment : Fragment() {
          * user has installed Google Play services and returned to the app.
          */
 //        val sydney = LatLng(-34.0, 151.0)
-        val centerLatLng = LatLng((shopLatLng.latitude+currentLatLng.latitude)/2, (shopLatLng.longitude+currentLatLng.longitude)/2)
+//        val centerLatLng = LatLng((shopLatLng.latitude+currentLatLng.latitude)/2, (shopLatLng.longitude+currentLatLng.longitude)/2)
         googleMap.addMarker(MarkerOptions().position(shopLatLng).title(gourmetData.name))
         googleMap.addMarker(MarkerOptions().position(currentLatLng).title("現在地")
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(centerLatLng))
-        zoomMap(centerLatLng.latitude,centerLatLng.longitude, googleMap)
+        zoomMap(shopLatLng, currentLatLng, googleMap)
     }
 
     override fun onCreateView(
@@ -62,12 +64,17 @@ class MapsFragment : Fragment() {
         mapFragment?.getMapAsync(callback)
     }
 
-    private fun zoomMap(latitude: Double, longitude: Double, googleMap: GoogleMap) {
+    private fun zoomMap(shopLatLng: LatLng, currentLatLng: LatLng, googleMap: GoogleMap) {
+        val latRange = abs(shopLatLng.latitude - currentLatLng.latitude) * 0.01
+        val lngRange = abs(shopLatLng.longitude - currentLatLng.longitude) * 0.02
+        val latitude  = (shopLatLng.latitude+currentLatLng.latitude)/2
+        val longitude = (shopLatLng.longitude+currentLatLng.longitude)/2
+
         // 表示する東西南北の緯度経度を設定
-        val south = latitude * (1 - 0.0005)
-        val west = longitude * (1 - 0.0005)
-        val north = latitude * (1 + 0.0005)
-        val east = longitude * (1 + 0.0005)
+        val south = latitude * (1 - latRange)
+        val west = longitude * (1 - lngRange)
+        val north = latitude * (1 + latRange)
+        val east = longitude * (1 + lngRange)
 
         // LatLngBounds (LatLng southwest, LatLng northeast)
         val bounds = LatLngBounds.builder()

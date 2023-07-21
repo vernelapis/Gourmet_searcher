@@ -9,6 +9,7 @@ import androidx.lifecycle.distinctUntilChanged
 import androidx.navigation.NavController
 import com.example.myapplication.models.Shop
 import com.example.myapplication.repository.Api
+import com.example.myapplication.repository.GPS
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,10 +17,10 @@ import kotlinx.coroutines.launch
 class HomeViewModel : ViewModel() {
 
 //    TODO: コメントアウト解除
-//    private lateinit var currentLat: String
-//    private lateinit var currentLng: String
-    val currentLat = "34.67"
-    val currentLng = "135.52"
+    private lateinit var currentLat: String
+    private lateinit var currentLng: String
+//    val currentLat = "34.67"
+//    val currentLng = "135.52"
 
     var range = 2
     var genre = 0
@@ -38,13 +39,12 @@ class HomeViewModel : ViewModel() {
     private var _searchedGourmetList = MutableLiveData<List<Shop>>(emptyList())
     val searchedGourmetList: LiveData<List<Shop>> = _searchedGourmetList.distinctUntilChanged()
 
-    fun searchGourmet(){
+    fun searchGourmet(context: Context){
         CoroutineScope(Dispatchers.IO).launch {
                 searchStart = 1
-//            TODO: コメントアウト解除
-//                val location = GPS(context).getCurrentLocation()
-//                currentLat = location.latitude.toString()
-//                currentLng = location.longitude.toString()
+                val location = GPS(context).getCurrentLocation()
+                currentLat = location.latitude.toString()
+                currentLng = location.longitude.toString()
                 val searchResultData = Api().gourmetSearch(currentLat, currentLng,
                     range+1,searchStart, genreCode[genre], budgetCode[budget])
                 println(searchResultData)

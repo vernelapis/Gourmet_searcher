@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
+        android:layout_marginBottom="100dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -84,14 +85,18 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".fragment.MapFragment"
                 map:cameraZoom="15.0"
-                map:layout_constraintTop_toTopOf="parent"
                 map:layout_constraintBottom_toBottomOf="parent"
                 map:layout_constraintEnd_toEndOf="parent"
                 map:layout_constraintEnd_toStartOf="parent"
+                map:layout_constraintTop_toTopOf="parent"
+                tools:context=".fragment.MapFragment"
                 tools:layout="@layout/fragment_maps" />
         </FrameLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
 
     </LinearLayout>
 

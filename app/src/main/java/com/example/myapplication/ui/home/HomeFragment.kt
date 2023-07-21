@@ -84,7 +84,7 @@ class HomeFragment : Fragment() {
 
         binding.locateAndSearchButton.setOnClickListener{
             try {
-                homeViewModel.searchGourmet()
+                homeViewModel.searchGourmet(requireContext())
                 findNavController().navigate(R.id.action_home_to_searchResult)
             } catch (e:Exception){
                 println(e)

@@ -75,6 +75,8 @@ class Api {
             }
         }
     }
+
+//    変換に邪魔な""を書き変え　intは一旦0に
     private fun replaceEmptyValues(jsonArray: JSONArray): JSONArray {
         val modifiedArray = JSONArray()
         for (i in 0 until jsonArray.length()) {
@@ -88,8 +90,8 @@ class Api {
                         jsonObject.put(key, "データなし")
                     }
                 } else if (value is JSONObject) {
-                    val nestedObject = replaceEmptyValues(JSONArray().put(value)) // Pass the JSONObject as a JSONArray
-                    jsonObject.put(key, JSONObject(nestedObject.getJSONObject(0).toString())) // Convert the JSONArray back to JSONObject
+                    val nestedObject = replaceEmptyValues(JSONArray().put(value))
+                    jsonObject.put(key, JSONObject(nestedObject.getJSONObject(0).toString()))
                 }
             }
             modifiedArray.put(jsonObject)

@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Gourmet Searcher</string>
     <string name="title_home">周辺検索</string>
+    <string name="range_spinner_label">検索する範囲</string>
+    <string name="genre_spinner_label">ジャンル</string>
+    <string name="budget_spinner_label">予算</string>
     <string name="locate_button_label">現在地を取得して検索</string>
 
     <string name="title_dashboard">Favorite</string>

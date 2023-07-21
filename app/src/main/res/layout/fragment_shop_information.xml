@@ -19,12 +19,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="120dp"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
                 app:urlImage="@{gourmet.photo.mobile.l}" />
 
@@ -74,6 +74,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@{gourmet.open}" />
+
+        <TextView
+            android:id="@+id/addressTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{gourmet.address}" />
 
         <FrameLayout
             android:layout_width="match_parent"

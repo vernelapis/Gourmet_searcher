@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 class HomeViewModel : ViewModel() {
 
 //    TODO: コメントアウト解除
-    private lateinit var currentLat: String
-    private lateinit var currentLng: String
+    lateinit var currentLat: String
+    lateinit var currentLng: String
 //    val currentLat = "34.67"
 //    val currentLng = "135.52"
 
